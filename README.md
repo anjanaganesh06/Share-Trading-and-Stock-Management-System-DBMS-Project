@@ -71,8 +71,7 @@ A full-stack **share trading and portfolio management platform** built with **Py
 git clone https://github.com/your-username/share-trading-system.git
 cd share-trading-system
 
-# Setup Python environment
-pip install -r requirements.txt
+
 
 # Configure MySQL connection in Flask app
 # (update host, user, password, db in app.py)
