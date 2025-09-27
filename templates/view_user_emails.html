@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Emails</title>
+</head>
+<body>
+    <h1>Emails for User ID {{ user_id }}</h1>
+    <table border="1">
+        <tr>
+            <th>Email ID</th>
+            <th>Actions</th>
+        </tr>
+        {% for email in emails %}
+        <tr>
+            <td>{{ email[1] }}</td>
+            <td>
+                <form action="{{ url_for('delete_email', user_id=user_id, email_id=email[1]) }}" method="POST" style="display:inline;">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('add_email', user_id=user_id) }}">Add New Email</a><br>
+    <a href="{{ url_for('view_users') }}">Back to User List</a>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Account Information</title>
+    
+    <!-- Include Bootstrap CSS for styling -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            color: #ff4c29;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .table-container {
+            margin: 20px auto;
+            width: 85%; /* Reduced the width slightly */
+            max-width: 900px;
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .table-container:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+        }
+
+        th {
+            font-weight: bold;
+            color: #ff4c29;
+            text-align: center;
+        }
+
+        td {
+            text-align: center;
+        }
+
+        .table-striped tbody tr:nth-child(odd) {
+            background-color: #2e2e2e;
+        }
+
+        .table-striped tbody tr:nth-child(even) {
+            background-color: #242424;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Assuming 'users' is a list of user dictionaries passed to the template -->
+{% for user in users %}
+    <h2 class="header">Account Information for {{ user.name }}</h2>
+    <div class="table-container">
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Risk Profile</th>
+                    <th>Account Type</th>
+                    <th>Account Details</th>
+                    <th>Account Status</th>
+                    <th>Opening Date</th>
+                    <th>Emails</th>
+                    <th>Phones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ user.user_id }}</td> <!-- user_id -->
+                    <td>{{ user.name }}</td> <!-- name -->
+                    <td>{{ user.risk_profile }}</td> <!-- risk_profile -->
+                    <td>{{ user.acc_type }}</td> <!-- acc_type -->
+                    <td>{{ user.account_details }}</td> <!-- account_details -->
+                    <td>{{ user.acc_status }}</td> <!-- acc_status -->
+                    <td>{{ user.opening_date }}</td> <!-- opening_date -->
+                    <!-- Emails and phones are lists, so join them with commas -->
+                    <td>{{ user.emails | join(', ') }}</td> <!-- emails joined with commas -->
+                    <td>{{ user.phones | join(', ') }}</td> <!-- phones joined with commas -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endfor %}
+
+</body>
+</html>

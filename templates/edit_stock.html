@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Stock</title>
+</head>
+<body>
+    <h1>Edit Stock</h1>
+
+    <form action="" method="POST">
+        <label for="comp_name">Company Name:</label>
+        <input type="text" name="comp_name" value="{{ stock[1] }}" required><br>
+
+        <label for="sector">Sector:</label>
+        <input type="text" name="sector" value="{{ stock[2] }}" required><br>
+
+        <label for="total_share">Total Share:</label>
+        <input type="number" step="0.01" name="total_share" value="{{ stock[3] }}" required><br>
+
+        <label for="market_price">Market Price:</label>
+        <input type="number" step="0.01" name="market_price" value="{{ stock[4] }}" required><br>
+
+        <label for="exchange_id">Exchange ID:</label>
+        <input type="text" name="exchange_id" value="{{ stock[5] }}" required><br>
+
+        <label for="listing_date">Listing Date:</label>
+        <input type="date" name="listing_date" value="{{ stock[8] }}" required><br>
+
+        <button type="submit">Update Stock</button>
+    </form>
+
+    <a href="{{ url_for('view_stocks') }}">Back to Stocks List</a>
+</body>
+</html>

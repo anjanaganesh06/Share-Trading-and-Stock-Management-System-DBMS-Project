@@ -1,0 +1,314 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        /* Dark Theme Styling */
+        body {
+            background-color: #1e1e2f;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        h2 {
+            color: #c3c3c3;
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            max-width: 900px;
+            background-color: #2b2b3d;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            color: #e0e0e0;
+        }
+        
+        th {
+            background-color: #3d3d4f;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #353545;
+        }
+        
+        tr:hover {
+            background-color: #4a4a60;
+        }
+
+        p {
+            text-align: center;
+            font-size: 18px;
+            color: #c3c3c3;
+        }
+        .filter-form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-form select,
+        .filter-form button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #3d3d4f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .filter-form select {
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Portfolio Listing</h2>
+    
+    <div class="filter-form">
+        <form action="{{ url_for('view_stocks') }}" method="GET">
+            <label for="filter">Filter by:</label>
+            <select name="filter" id="filter">
+                <option value="all" {% if filter_option == 'all' %}selected{% endif %}>All Stocks</option>
+                <option value="above_500" {% if filter_option == 'above_500' %}selected{% endif %}>Market Price > 500</option>
+            </select>
+            <button type="submit">Apply Filter</button>
+        </form>
+    </div>
+
+    
+    <table>
+        <tr>
+            <th>Stock ID</th>
+            <th>Company Name</th>
+            <th>Sector</th>
+            <th>Total Shares</th>
+            <th>Market Price</th>
+            <th>Actions</th>
+        </tr>
+        {% for stock in stocks %}
+        <tr>
+            <td>{{ stock[0] }}</td>
+            <td>{{ stock[1] }}</td>
+            <td>{{ stock[2] }}</td>
+            <td>{{ stock[3] }}</td>
+            <td>{{ stock[4] }}</td>
+            <form action="{{ url_for('execute_trade') }}" method="POST" style="display: flex; align-items: center; gap: 5px;">
+        
+           <input type="hidden" name="stock_id" value="{{ stock[0] }}">
+        
+           <input type="number" name="quantity" min="1" required placeholder="Qty" style="width: 60px;">
+        
+           <button type="submit" name="action" value="Buy" class="btn btn-success btn-sm">Buy</button>
+           <button type="submit" name="action" value="Sell" class="btn btn-danger btn-sm">Sell</button>
+
+    </form>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    <button onclick="calculateMaxSectorPrice()">Calculate Max Price per Sector</button>
+
+    <div id="max-sector-prices"></div>
+
+    <script>
+        function calculateMaxSectorPrice() {
+            // Make an AJAX request to your Flask endpoint to fetch the data
+            fetch('/calculate_max_sector_price')
+                .then(response => response.json())
+                .then(data => {
+                    const maxSectorPrices = data;
+                    const maxPriceDiv = document.getElementById('max-sector-prices');
+                    maxPriceDiv.innerHTML = '<h2>Maximum Price per Sector</h2>';
+                    for (const sector in maxSectorPrices) {
+                        maxPriceDiv.innerHTML += `<p>${sector}: ${maxSectorPrices[sector]}</p>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        }
+    </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Listing</title>
+    <style>
+        /* Dark Theme Styling */
+        body {
+            background-color: #1e1e2f;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        h2 {
+            color: #c3c3c3;
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            max-width: 900px;
+            background-color: #2b2b3d;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            color: #e0e0e0;
+            border-bottom: 1px solid #3d3d4f;
+        }
+        
+        th {
+            background-color: #3d3d4f;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #353545;
+        }
+        
+        tr:hover {
+            background-color: #4a4a60;
+        }
+
+        p {
+            text-align: center;
+            font-size: 18px;
+            color: #c3c3c3;
+        }
+
+        .filter-form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-form select,
+        .filter-form button,
+        .action-button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #3d3d4f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .filter-form select {
+            width: 200px;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        .btn-success { background-color: #28a745; }
+        .btn-danger { background-color: #dc3545; }
+
+    </style>
+</head>
+<body>
+    <h2>Stock Listing</h2>
+    
+    <div class="filter-form">
+        <form action="{{ url_for('view_stocks') }}" method="GET">
+            <label for="filter">Filter by:</label>
+            <select name="filter" id="filter">
+                <option value="all" {% if filter_option == 'all' %}selected{% endif %}>All Stocks</option>
+                <option value="above_500" {% if filter_option == 'above_500' %}selected{% endif %}>Market Price > 500</option>
+            </select>
+            <button type="submit">Apply Filter</button>
+        </form>
+    </div>
+
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Stock ID</th>
+                <th>Company Name</th>
+                <th>Sector</th>
+                <th>Total Shares</th>
+                <th>Market Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+            <tr>
+                <td>{{ stock[0] }}</td>
+                <td>{{ stock[1] }}</td>
+                <td>{{ stock[2] }}</td>
+                <td>{{ stock[3] }}</td>
+                <td>{{ stock[4] }}</td>
+                <td>
+                    {% if session.role == 'user' %}
+
+                    <form action="{{ url_for('execute_trade') }}" method="POST" style="display: flex; align-items: center; gap: 5px;">
+                        <input type="hidden" name="stock_id" value="{{ stock[0] }}">
+                        <input type="number" name="quantity" min="1" required placeholder="Qty" style="width: 60px;">
+                        <button type="submit" name="action" value="Buy" class="btn btn-success">Buy</button>
+                        <button type="submit" name="action" value="Sell" class="btn btn-danger">Sell</button>
+                    </form>
+                     {% endif %}
+                </td>
+                 </td>
+
+            </tr>
+                    {% endfor %} 
+
+        </tbody>
+    </table>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <button class="action-button" onclick="calculateMaxSectorPrice()">Calculate Max Price per Sector</button>
+    </div>
+
+    <div id="max-sector-prices" style="text-align: center; margin-top: 20px;"></div>
+
+    <script>
+        function calculateMaxSectorPrice() {
+            fetch('/calculate_max_sector_price')
+                .then(response => response.json())
+                .then(data => {
+                    const maxSectorPrices = data;
+                    const maxPriceDiv = document.getElementById('max-sector-prices');
+                    maxPriceDiv.innerHTML = '<h2>Maximum Price per Sector</h2>';
+                    for (const sector in maxSectorPrices) {
+                        maxPriceDiv.innerHTML += `<p>${sector}: ${maxSectorPrices[sector]}</p>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        }
+    </script>
+</body>
+</html>

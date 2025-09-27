@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Email id</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    body {
+        background-color: #121212;
+        color: #ffffff;
+    }
+    .form-container {
+        background-color: #1e1e1e;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        max-width: 600px;
+        margin: auto;
+    }
+    .form-label, .form-control {
+        color: #c9c9c9;
+    }
+    .btn-submit {
+        background-color: #ff4c29;
+        color: #ffffff;
+    }
+    .btn-submit:hover {
+        background-color: #e03d20;
+    }
+    .header {
+        color: #ff4c29;
+    }
+</style>
+</head>
+<body>
+    <h1>Add Phone for User ID {{ user_id }}</h1>
+    <!--<form action="{{ url_for('add_email', user_id=user_id) }}" method="POST">
+        <label for="email_id">Email:</label>
+        <input type="email" id="email_id" name="email_id" required>
+        <button type="submit">Add Email</button>
+    </form>-->
+     <!-- Add Email ID Form -->
+     <div class="form-container mt-4">
+        <h3 class="text-center">Add Email ID</h3>
+        <form action="{{ url_for('add_email', user_id=user_id) }}" method="post">
+            <div class="mb-3">
+                <label for="email_id" class="form-label">Email ID</label>
+                <input type="email" class="form-control" id="email_id" name="email_id" required>
+            </div>
+            <button type="submit" class="btn btn-submit w-100">Add Email</button>
+        </form>
+    </div>
+
+    <!-- Add Phone Number Form -->
+    
+    <a href="{{ url_for('view_users') }}">Back to User List</a>
+</body>
+</html>

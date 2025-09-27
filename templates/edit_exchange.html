@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Edit Exchange</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .form-container {
+            background-color: #1e1e1e;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin: auto;
+        }
+        .form-label, .form-control {
+            color: #c9c9c9;
+        }
+        .btn-submit {
+            background-color: #ff4c29;
+            color: #ffffff;
+            border: none;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-submit:hover {
+            background-color: #e0431b;
+        }
+        .header {
+            color: #ff4c29;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="header">Edit Exchange</h1>
+    <div class="container mt-5">
+        <div class="form-container">
+            <form method="POST">
+                <!-- Exchange Name -->
+                <div class="mb-3">
+                    <label for="exchange_name" class="form-label">Exchange Name</label>
+                    <input type="text" class="form-control" name="exchange_name" value="{{ exchange['Exchange_Name'] }}" required>
+                </div>
+
+                <!-- Country -->
+                <div class="mb-3">
+                    <label for="country" class="form-label">Country</label>
+                    <input type="text" class="form-control" name="country" value="{{ exchange['Country'] }}">
+                </div>
+
+                <!-- Currency -->
+                <div class="mb-3">
+                    <label for="currency" class="form-label">Currency</label>
+                    <input type="text" class="form-control" name="currency" value="{{ exchange['Currency'] }}">
+                </div>
+
+                <!-- Operating Hours -->
+                <div class="mb-3">
+                    <label for="operating_hours" class="form-label">Operating Hours</label>
+                    <input type="text" class="form-control" name="operating_hours" value="{{ exchange['Operating_hours'] }}">
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-submit w-100">Update Exchange</button>
+            </form>
+
+            <!-- Back Link -->
+            <a href="{{ url_for('view_exchanges') }}" class="btn btn-link text-center mt-3" style="color: #ff4c29;">Back to Exchange List</a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

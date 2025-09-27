@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User - Share Trading System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .form-container {
+            background-color: #1e1e1e;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin: auto;
+        }
+        .form-label, .form-control {
+            color: #c9c9c9;
+        }
+        .btn-submit {
+            background-color: #ff4c29;
+            color: #ffffff;
+        }
+        .btn-submit:hover {
+            background-color: #e03d20;
+        }
+        .header {
+            color: #ff4c29;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center header">Share Trading System</h1>
+        <h3 class="text-center">Enter User Details</h3>
+        <div class="form-container mt-4">
+            <!-- Single Add User Form -->
+            <form action="{{ url_for('add_user') }}" method="post">
+                <!-- User ID -->
+                <div class="mb-3">
+                    <label for="user_id" class="form-label">User ID</label>
+                    <input type="text" class="form-control" id="user_id" name="user_id" required>
+                </div>
+                
+                <!-- Name -->
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+
+                <!-- Risk Profile -->
+                <div class="mb-3">
+                    <label for="risk_profile" class="form-label">Risk Profile</label>
+                    <select class="form-control" id="risk_profile" name="risk_profile" required>
+                        <option value="Low">Low</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                
+                <!-- Account ID -->
+                <div class="mb-3">
+                    <label for="account_id" class="form-label">Account ID</label>
+                    <input type="text" class="form-control" id="account_id" name="account_id" required>
+                </div>
+
+                <!-- Account Type -->
+                <div class="mb-3">
+                    <label for="acc_type" class="form-label">Account Type</label>
+                    <input type="text" class="form-control" id="acc_type" name="acc_type">
+                </div>
+
+                <!-- Account Details -->
+                <div class="mb-3">
+                    <label for="account_details" class="form-label">Account Details</label>
+                    <input type="text" class="form-control" id="account_details" name="account_details" required>
+                </div>
+                
+                <!-- Account Status -->
+                <div class="mb-3">
+                    <label for="acc_status" class="form-label">Account Status</label>
+                    <select class="form-control" id="acc_status" name="acc_status">
+                        <option value="active">Active</option>
+                        <option value="closed">Closed</option>
+                        <option value="pending">Pending</option>
+                    </select>
+                </div>
+
+                <!-- Opening Date -->
+                <div class="mb-3">
+                    <label for="opening_date" class="form-label">Opening Date</label>
+                    <input type="date" class="form-control" id="opening_date" name="opening_date">
+                </div>
+
+                <!-- Email ID -->
+                <div class="mb-3">
+                    <label for="email_id" class="form-label">Email ID</label>
+                    <input type="email" class="form-control" id="email_id" name="email_id" required>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="mb-3">
+                    <label for="phone_no" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone_no" name="phone_no" required>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-submit w-100">Add User</button>
+            </form>
+            
+            <!-- Success Message -->
+            {% if message %}
+                <div class="alert alert-success mt-3">{{ message }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

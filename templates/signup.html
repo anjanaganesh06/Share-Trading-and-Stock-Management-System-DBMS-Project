@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <title>Sign Up</title>
+    <style>
+        body {
+            background-color: #6fa3a5; /* Slightly darker, more appealing background */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+
+        .signup-container {
+            background-color: rgba(30, 30, 30, 0.85); /* Semi-transparent dark form background */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Stronger shadow for a modern look */
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            color: #f5b942; /* Bright, engaging color for the title */
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+        .form-label {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #f5b942; /* Matching color with the title */
+        }
+
+        .form-select, .form-control {
+            background-color: #859594e6;
+            color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-control::placeholder {
+            color: #d1d1d1; /* Light grey placeholder text */
+        }
+
+        button {
+            background-color: #f5b942; /* Bright button color */
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #cc9e33; /* Slightly darker on hover */
+        }
+
+        .error {
+            color: rgba(255, 100, 100, 0.9);
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .login-link {
+            margin-top: 20px;
+            color: #f5b942;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .login-link:hover {
+            color: #d3a833;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        
+        <form method="POST">
+            <label for="name" class="form-label">Select Your Name:</label>
+            <select id="name" name="name" class="form-select" required>
+                <option value="">Select your name</option>
+                {% for name in names %}
+                    <option value="{{ name }}">{{ name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Enter username" required>
+
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter email" required>
+
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" required>
+
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+</body>
+</html>

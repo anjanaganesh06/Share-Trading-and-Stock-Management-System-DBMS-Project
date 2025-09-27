@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exchange Services</title>
+</head>
+<body>
+    <h1>Exchange Services</h1>
+    <a href="{{ url_for('add_exchange') }}">Add New Exchange</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Exchange ID</th>
+                <th>Currency</th>
+                <th>Exchange Name</th>
+                <th>Country</th>
+                <th>Operating Hours</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for exchange in exchanges %}
+            <tr>
+                <td>{{ exchange.exchange_id }}</td>
+                <td>{{ exchange.currency }}</td>
+                <td>{{ exchange.exchange_name }}</td>
+                <td>{{ exchange.country }}</td>
+                <td>{{ exchange.operating_hours }}</td>
+                <td>
+                    <a href="{{ url_for('update_exchange', exchange_id=exchange.exchange_id) }}">Edit</a>
+                    <form action="{{ url_for('delete_exchange', exchange_id=exchange.exchange_id) }}" method="POST" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

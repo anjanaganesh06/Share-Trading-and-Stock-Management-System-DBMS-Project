@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Stock - Share Trading System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .form-container {
+            background-color: #1e1e1e;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin: auto;
+        }
+        .form-label, .form-control {
+            color: #c9c9c9;
+        }
+        .form-control::placeholder {
+            color: #999999;
+        }
+        .btn-submit {
+            background-color: #ff4c29;
+            color: #ffffff;
+        }
+        .btn-submit:hover {
+            background-color: #e03d20;
+        }
+        .header {
+            color: #ff4c29;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center header">Share Trading System</h1>
+        <h3 class="text-center">Add New Stock</h3>
+        <div class="form-container mt-4">
+            <form action="{{ url_for('add_stock') }}" method="post">
+                <div class="mb-3">
+                    <label for="stock_id" class="form-label">Stock ID</label>
+                    <input type="text" class="form-control" id="stock_id" name="stock_id" required placeholder="Enter Stock ID" maxlength="20">
+                </div>
+                <div class="mb-3">
+                    <label for="comp_name" class="form-label">Company Name</label>
+                    <input type="text" class="form-control" id="comp_name" name="comp_name" maxlength="30" placeholder="Enter Company Name">
+                </div>
+                <div class="mb-3">
+                    <label for="sector" class="form-label">Sector</label>
+                    <input type="text" class="form-control" id="sector" name="sector" maxlength="10" placeholder="Enter Sector">
+                </div>
+                <div class="mb-3">
+                    <label for="total_share" class="form-label">Total Shares</label>
+                    <input type="number" class="form-control" id="total_share" name="total_share" placeholder="Enter Total Shares">
+                </div>
+                <div class="mb-3">
+                    <label for="market_price" class="form-label">Market Price</label>
+                    <input type="number" step="0.01" class="form-control" id="market_price" name="market_price" placeholder="Enter Market Price">
+                </div>
+                <div class="mb-3">
+                    <label for="exchange_id" class="form-label">Exchange ID</label>
+                    <select class="form-control" id="exchange_id" name="exchange_id" required>
+                        <option value="" disabled selected>Select an Exchange</option>
+                        {% for exchange in exchanges %}
+                            <option value="{{ exchange[0] }}">{{ exchange[0] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="listing_date" class="form-label">Listing Date</label>
+                    <input type="date" class="form-control" id="listing_date" name="listing_date" placeholder="Enter Listing Date">
+                </div>
+                <button type="submit" class="btn btn-submit w-100">Add Stock</button>
+            </form>
+            {% if message %}
+                <div class="alert alert-success mt-3">{{ message }}</div>
+            {% endif %}
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

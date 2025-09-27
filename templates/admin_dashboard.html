@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Share Trading and Stock Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #e0f7fa;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .dashboard-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #00796b;
+        }
+
+        .admin-info {
+            font-size: 1.2em;
+            margin: 20px;
+            background-color: #f4f4f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button-container a {
+            text-decoration: none;
+            background-color: #00796b;
+            padding: 10px 20px;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 5px;
+        }
+
+        .button-container a:hover {
+            background-color: #004d40;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Welcome, Admin {{ session['username'] }}!</h1>
+        <div class="admin-info">
+            <p>Manage the system, view user portfolios, and manage stock data.</p>
+            <p>Role: {{ session['role'] }}</p>
+        </div>
+
+        <div class="button-container">
+            <!-- Table Selection Buttons -->
+            <a href="{{ url_for('manage_users') }}">Manage Users</a>
+            <a href="{{ url_for('manage_stocks') }}">Manage Stocks</a>
+           <a href="{{ url_for('manage_portfolios') }}">Manage Portfolios</a>
+            <a href="{{ url_for('manage_orders') }}">Manage Orders</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+</body>
+</html>

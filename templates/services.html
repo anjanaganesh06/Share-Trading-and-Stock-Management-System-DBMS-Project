@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services Provided</title>
+    <style>
+        /* Dark theme styling */
+        body {
+            background-color: #584f59ba;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+        
+        .services-section {
+            background-color: #1e1e1ea8;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .services-section h2 {
+            color: #ff4c29;
+            margin-bottom: 1.5rem;
+        }
+
+        .services-section a {
+            display: block;
+            color: #c9c9c9;
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .services-section a:hover {
+            background-color: #333333ab;
+            color: #ff4c29;
+        }
+    </style>
+</head>
+<body>
+    <section class="services-section">
+        <h2>Services Provided</h2>
+        <a href="{{ url_for('add_user') }}">Add User</a>
+        <a href="{{ url_for('view_users') }}">View Users</a>
+        <a href="{{ url_for('view_stocks') }}">View Stocks</a>
+        <a href="{{ url_for('add_stock') }}">Add New Stock</a>
+        <a href="{{ url_for('add_portfolio') }}">Add New Portfolios</a>
+        <a href="{{ url_for('view_portfolios') }}">View Portfolios</a>
+
+        <!-- New link to view orders -->
+        <a href="{{ url_for('view_order_form') }}">View Orders</a>
+        <a href="{{ url_for('view_exchanges') }}">Exchange Service</a>
+        <!-- New link for transaction services -->
+        <a href="{{ url_for('view_transactions') }}">View Transactions</a>
+        <a href="{{ url_for('add_transaction') }}">Add New Transaction</a>
+
+    </section>
+</body>
+</html>

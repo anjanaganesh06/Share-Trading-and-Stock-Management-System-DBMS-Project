@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit User</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #121212; color: #ffffff; }
+        .form-container { background-color: #1e1e1e; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); max-width: 600px; margin: auto; }
+        .form-label, .form-control { color: #c9c9c9; }
+        .btn-submit { background-color: #ff4c29; color: #ffffff; border: none; padding: 6px 12px; cursor: pointer; font-size: 14px; }
+        .btn-submit:hover { background-color: #e0431b; }
+        .header { color: #ff4c29; text-align: center; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1 class="header">Edit User</h1>
+    <div class="container mt-5">
+        <div class="form-container">
+            <form method="POST">
+                <!-- User Name -->
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name" value="{{ user['name'] }}" required>
+                </div>
+
+                <!-- Risk Profile -->
+                <div class="mb-3">
+                    <label for="risk_profile" class="form-label">Risk Profile</label>
+                    <input type="text" class="form-control" name="risk_profile" value="{{ user['risk_profile'] }}">
+                </div>
+
+                <!-- Account Type -->
+                <div class="mb-3">
+                    <label for="acc_type" class="form-label">Account Type</label>
+                    <input type="text" class="form-control" name="acc_type" value="{{ user['acc_type'] }}">
+                </div>
+
+                <!-- Account Details -->
+                <div class="mb-3">
+                    <label for="acc_details" class="form-label">Account Details</label>
+                    <input type="text" class="form-control" name="acc_details" value="{{ user['account_details'] }}">
+                </div>
+
+                <!-- Account Status -->
+                <div class="mb-3">
+                    <label for="acc_status" class="form-label">Account Status</label>
+                    <select class="form-control" name="acc_status" required>
+                        <option value="active" {% if user['acc_status'] == 'active' %}selected{% endif %}>Active</option>
+                        <option value="closed" {% if user['acc_status'] == 'closed' %}selected{% endif %}>Closed</option>
+                        <option value="pending" {% if user['acc_status'] == 'pending' %}selected{% endif %}>Pending</option>
+                    </select>
+                </div>
+
+                <!-- Opening Date -->
+                <div class="mb-3">
+                    <label for="opening_date" class="form-label">Opening Date</label>
+                    <input type="date" class="form-control" name="opening_date" value="{{ user['opening_date'] }}">
+                </div>
+
+                <!-- Emails -->
+                <div class="mb-3 email-container">
+                    <label for="email" class="form-label">Email(s)</label>
+                    {% for email in emails %}
+                        <input type="email" class="form-control mb-2" name="email" value="{{ email }}">
+                    {% endfor %}
+                    <button type="button" onclick="addEmailInput()">Add Another Email</button>
+                </div>
+
+                <!-- Phones -->
+                <div class="mb-3 phone-container">
+                    <label for="phone" class="form-label">Phone(s)</label>
+                    {% for phone in phones %}
+                        <input type="text" class="form-control mb-2" name="phone" value="{{ phone }}">
+                    {% endfor %}
+                    <button type="button" onclick="addPhoneInput()">Add Another Phone</button>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-submit w-100">Update User</button>
+            </form>
+
+            <a href="{{ url_for('view_users') }}" class="btn btn-link text-center mt-3" style="color: #ff4c29;">Back to User List</a>
+        </div>
+    </div>
+
+    <script>
+        function addEmailInput() {
+            const emailContainer = document.querySelector('.email-container');
+            const input = document.createElement('input');
+            input.type = 'email';
+            input.name = 'email';
+            input.className = 'form-control mb-2';
+            emailContainer.appendChild(input);
+        }
+
+        function addPhoneInput() {
+            const phoneContainer = document.querySelector('.phone-container');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'phone';
+            input.className = 'form-control mb-2';
+            phoneContainer.appendChild(input);
+        }
+    </script>
+</body>
+</html>

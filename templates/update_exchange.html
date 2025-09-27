@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Exchange</title>
+</head>
+<body>
+    <h1>Update Exchange</h1>
+    <form action="{{ url_for('update_exchange', exchange_id=exchange.exchange_id) }}" method="POST">
+        <label for="currency">Currency:</label><br>
+        <input type="text" name="currency" value="{{ exchange.currency }}" required><br>
+
+        <label for="exchange_name">Exchange Name:</label><br>
+        <input type="text" name="exchange_name" value="{{ exchange.exchange_name }}" required><br>
+
+        <label for="country">Country:</label><br>
+        <input type="text" name="country" value="{{ exchange.country }}" required><br>
+
+        <label for="operating_hours">Operating Hours:</label><br>
+        <input type="number" name="operating_hours" value="{{ exchange.operating_hours }}" required><br>
+
+        <button type="submit">Update Exchange</button>
+    </form>
+</body>
+</html>

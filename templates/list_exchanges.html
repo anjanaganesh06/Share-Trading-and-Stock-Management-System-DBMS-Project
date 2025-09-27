@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Exchanges</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .table-container {
+            margin: 20px auto;
+            width: 90%;
+            max-width: 1200px;
+        }
+        table {
+            width: 100%;
+            background-color: #1e1e1e;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #333;
+        }
+        .header {
+            color: #ff4c29;
+        }
+        .btn-submit {
+            padding: 6px 12px;
+            background-color: #ff4c29;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-submit:hover {
+            background-color: #e0431b;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="text-center header">Exchange List</h1>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Exchange ID</th>
+                    <th>Currency</th>
+                    <th>Exchange Name</th>
+                    <th>Country</th>
+                    <th>Operating Hours</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exchange in exchanges %}
+                <tr>
+                    <td>{{ exchange[0] }}</td>  <!-- Exchange_ID -->
+                    <td>{{ exchange[1] }}</td>  <!-- Currency -->
+                    <td>{{ exchange[2] }}</td>  <!-- Exchange_Name -->
+                    <td>{{ exchange[3] }}</td>  <!-- Country -->
+                    <td>{{ exchange[4] }}</td>  <!-- Operating_hours -->
+                    <td>
+                        <!-- Edit and Delete actions -->
+                        <a href="{{ url_for('edit_exchange', exchange_id=exchange[0]) }}" class="btn-submit">Edit</a> |
+                        <form action="{{ url_for('delete_exchange', exchange_id=exchange[0]) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn-submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

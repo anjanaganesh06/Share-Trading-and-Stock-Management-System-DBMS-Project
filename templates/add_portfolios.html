@@ -1,0 +1,86 @@
+<!-- add_portfolio.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2f;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            background-color: #2e2e3f;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+            width: 300px;
+        }
+        label, input, select {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input[type="submit"] {
+            background-color: #5a5aff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        input[type="submit"]:hover {
+            background-color: #4040c0;
+        }
+    </style>
+</head>
+<body>
+    <form action="{{ url_for('add_portfolio') }}" method="POST">
+        <h2>Add New Portfolio</h2>
+
+        <label for="portfolio_id">Portfolio ID</label>
+        <input type="text" id="portfolio_id" name="portfolio_id" required>
+
+        <label for="user_id">User ID</label>
+        <select id="user_id" name="user_id" required>
+            <option value="">Select User</option>
+            {% for user in users %}
+                <option value="{{ user[0] }}">{{ user[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="portfolio_value">Portfolio Value</label>
+        <input type="number" id="portfolio_value" name="portfolio_value">
+
+        <label for="portfolio_name">Portfolio Name</label>
+        <input type="text" id="portfolio_name" name="portfolio_name">
+
+        <label for="risk_level">Risk Level</label>
+        <input type="text" id="risk_level" name="risk_level">
+
+        <label for="created_date">Created Date</label>
+        <input type="date" id="created_date" name="created_date">
+
+        <label for="stock_id">Stock ID</label>
+        <select id="stock_id" name="stock_id">
+            <option value="">Select Stock</option>
+            {% for stock in stocks %}
+                <option value="{{ stock[0] }}">{{ stock[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Add Portfolio">
+    </form>
+</body>
+</html>

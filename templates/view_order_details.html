@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Order Stock Details</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1e1e2f;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .btn-submit {
+            background-color: #ff4c29;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">View Order and Stock Details</h2>
+
+        <!-- Form to submit stock_id and order_id -->
+        <form action="{{ url_for('view_order_form') }}" method="POST">
+            <div class="mb-3">
+                <label for="stock_id" class="form-label">Stock ID</label>
+                <input type="text" class="form-control" id="stock_id" name="stock_id" required>
+            </div>
+            <div class="mb-3">
+                <label for="order_id" class="form-label">Order ID</label>
+                <input type="text" class="form-control" id="order_id" name="order_id" required>
+            </div>
+            <button type="submit" class="btn btn-submit">Fetch Details</button>
+        </form>
+
+        <!-- Flash message if no records are found -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="mt-3">
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <!-- Display order and stock details in a table if available -->
+        {% if order_details %}
+        <div class="mt-4">
+            <h3>Order and Stock Details</h3>
+            <table class="table table-dark table-bordered">
+                <tbody>
+                    {% for key, value in order_details.items() %}
+                    <tr>
+                        <th>{{ key }}</th>
+                        <td>{{ value }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
